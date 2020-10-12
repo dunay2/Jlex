@@ -89,13 +89,14 @@ public static void main (String argv[]) throws Exception {
 
 
 KEYWORD=(audio|switch|json|script|service|plays|opens|closes|int|string|endpoint|request|say|let|sleep)
-OPERATOR=(\+\+|\+|-|\*|\/|=)
 DELIMITER=(\{|\}|\(|\)|;|:|,)
 COMMENT=#.*
 IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 INTEGER=-?[0-9]+
 STRING=\"[^\\\"]*\"
-PATH=//?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+
+PATH=//?([a-zA-Z0-9._]*/)+[a-zA-Z0-9._]+
+PATH=(//?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+|/[a-zA-Z0-9._]+)
+OPERATOR=(\+\+?|-|\*|\/|=)
 URL=https?://([a-zA-Z0-9]+\.)+(com|org|net|cat|es|de|fr|it)(/[a-zA-Z0-9]+)*/?
 
 NEWLINE=[\n\r]
@@ -141,6 +142,7 @@ SPACE=[\t ]
     LexerEvaluator.emitToken(TokenType.STRING, yytext());
 }
 
+
 {PATH}
  {
     LexerEvaluator.emitToken(TokenType.PATH, yytext());
@@ -152,6 +154,7 @@ SPACE=[\t ]
      LexerEvaluator.emitToken(TokenType.OPERATOR, yytext());
      System.out.println("OPERATOR : " + yytext());
  }
+
 
 {URL}
  {
