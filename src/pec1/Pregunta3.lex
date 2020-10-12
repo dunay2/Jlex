@@ -87,13 +87,88 @@ public static void main (String argv[]) throws Exception {
 %integer
 %notunix
 
-#MACROS
-DIGITS=-?[0-9]+
+//MACROS
+KEYWORD=(audio|switch|json|script|service|plays|open|closes|int|string|endpoint|request|say|let|sleep)
+OPERATOR=(\+\+|\+|-|\*|\/|=)
+DELIMITER=(\{|\}|\(|\)|;|:|,)
+COMMENT=#.*
+IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
+INTEGER=-?[0-9]+
 STRING=\"[^\\]*\"
-ALPHANUMERIC=[a-zA-Z0-9]
-FILEPATH=//?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+
+PATH=//?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+
 URL=https?://([a-zA-Z0-9]+\.)+(com|org|net|cat|es|de|fr|it)(/[a-zA-Z0-9]+)*
-WHITESPACE=[\040\n]
+
+NEWLINE=[\n\r]
+SPACE=[\t ]
 
 %%
 
+{KEYWORD}
+{
+    LexerEvaluator.emitToken(TokenType.KEYWORD, yytext());
+    numReserved++;
+    System.out.println("RESERVED : " + yytext());
+}
+
+{OPERATOR}
+{
+    LexerEvaluator.emitToken(TokenType.OPERATOR, yytext());
+    System.out.println("OPERATOR : " + yytext());
+}
+
+{DELIMITER}
+{
+    LexerEvaluator.emitToken(TokenType.DELIMITER, yytext());
+    System.out.println("DELIMITER : " + yytext());
+}
+
+{COMMENT}
+{
+    LexerEvaluator.emitToken(TokenType.COMMENT, yytext());
+    System.out.println("COMMENT: " + yytext());
+}
+
+{IDENTIFIER}
+{
+    System.out.println("ID is ..." + yytext());
+    LexerEvaluator.emitToken(TokenType.IDENTIFIER, yytext());
+    numIdentifier++;
+}
+
+{INTEGER}
+{
+    LexerEvaluator.emitToken(TokenType.INTEGER, yytext());
+    System.out.println("INTEGER ..." + yytext());
+}
+
+{STRING}
+{
+    System.out.println("STRING: " + yytext());
+    LexerEvaluator.emitToken(TokenType.STRING, yytext());
+}
+
+{PATH}
+ {
+    LexerEvaluator.emitToken(TokenType.PATH, yytext());
+    System.out.println("FILEPATH: " + yytext());
+ }
+{URL}
+ {
+    LexerEvaluator.emitToken(TokenType.URL, yytext());
+    System.out.println("FILEPATH: " + yytext());
+ }
+ {SPACE}
+ {
+    System.out.println("Space");
+ }
+ {NEWLINE}
+ {
+    System.out.println("New line");
+ }
+//when others
+ .
+ {
+   LexerEvaluator.emitUnrecognizedTokenError(yytext());
+   numError++;
+   System.out.println("Lex error: " + yytext());
+ }
