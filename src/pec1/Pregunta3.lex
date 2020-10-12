@@ -87,14 +87,14 @@ public static void main (String argv[]) throws Exception {
 %integer
 %notunix
 
-//MACROS
-KEYWORD=(audio|switch|json|script|service|plays|open|closes|int|string|endpoint|request|say|let|sleep)
+
+KEYWORD=(audio|switch|json|script|service|plays|opens|closes|int|string|endpoint|request|say|let|sleep)
 OPERATOR=(\+\+|\+|-|\*|\/|=)
 DELIMITER=(\{|\}|\(|\)|;|:|,)
 COMMENT=#.*
 IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 INTEGER=-?[0-9]+
-STRING=\"[^\\]*\"
+STRING=\"[^\\\"]*\"
 PATH=//?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+
 URL=https?://([a-zA-Z0-9]+\.)+(com|org|net|cat|es|de|fr|it)(/[a-zA-Z0-9]+)*
 
@@ -165,7 +165,7 @@ SPACE=[\t ]
  {
     System.out.println("New line");
  }
-//when others
+
  .
  {
    LexerEvaluator.emitUnrecognizedTokenError(yytext());
