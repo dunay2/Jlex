@@ -84,8 +84,16 @@ public static void main (String argv[]) throws Exception {
 
 %}
 
-// Place your JLex code here:
-// NOTE: You will need to delete this message and fill in the necessary JLex directives for it to continue.
+%integer
+%notunix
+
+#MACROS
+DIGITS=-?[0-9]+
+STRING=\"[^\\]*\"
+ALPHANUMERIC=[a-zA-Z0-9]
+FILEPATH=//?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+
+URL=https?://([a-zA-Z0-9]+\.)+(com|org|net|cat|es|de|fr|it)(/[a-zA-Z0-9]+)*
+WHITESPACE=[\040\n]
 
 %%
 
