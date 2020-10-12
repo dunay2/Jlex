@@ -1,0 +1,30 @@
+# This is a simple comment
+
+# Audio service definition: A home service is a built-in kind of
+# service allowing to play sound audio_service PlayAlarmSound plays /home/user/Music/alarm.ogg;
+# A trigger service definition is used to enable or disable lights and switches,
+# those come preconfigured and you don't need to specify them here.
+switch service OpenKitchenLight opens SWITCH0
+switch service CloseBathroomLight closes SWITCH2
+switch service ToggleGarageDoor toggles SWITCH5
+
+# JSON Service definition: This kind of service allows calling
+# external HTTP endpoints that consume JSON
+json_service AddToShoppingList (productId : int) {
+    endpoint: https://www.amazon.com/api/addToShoppingCart/
+    request: {
+        product_id: productId,
+        amount: 1,
+    }
+}
+
+script_service HandleShoppingCart () {
+    say("What product do you want to add to the shopping cart?");
+    let product_id = feedback(int);
+}
+script_service NearGarageDoor () {
+    let wait_time = 10*60; # 10 minutes
+    ToggleGarageDoor();
+    sleep(wait_time); # Sleeps for a given number of seconds
+    ToggleGarageDoor();
+}

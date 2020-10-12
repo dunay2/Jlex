@@ -1,0 +1,43 @@
+COMMENT$$# Aixo es un comentari tot sol
+ERROR$$%
+OPERATOR$$+
+OPERATOR$$-
+OPERATOR$$*
+OPERATOR$$/
+OPERATOR$$++
+OPERATOR$$=
+COMMENT$$# I aixo es un comentari en una linia
+KEYWORD$$audio
+KEYWORD$$switch
+KEYWORD$$json
+KEYWORD$$script
+KEYWORD$$service
+KEYWORD$$plays
+KEYWORD$$opens
+KEYWORD$$closes
+KEYWORD$$int
+KEYWORD$$string
+KEYWORD$$endpoint
+KEYWORD$$request
+KEYWORD$$say
+KEYWORD$$let
+KEYWORD$$sleep
+DELIMITER$${
+DELIMITER$$}
+DELIMITER$$(
+DELIMITER$$)
+DELIMITER$$;
+DELIMITER$$:
+IDENTIFIER$$nomServei
+IDENTIFIER$$nom_servei2
+IDENTIFIER$$__nomServei3__
+INTEGER$$1
+INTEGER$$24
+INTEGER$$123019823
+INTEGER$$000123
+INTEGER$$0
+INTEGER$$-25
+STRING$$"aixo es un string"
+STRING$$"i aixo tambe"
+URL$$https://www.example.com/hola/adeu
+PATH$$/home/josep/.config/i3/config

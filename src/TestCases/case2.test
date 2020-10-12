@@ -1,0 +1,93 @@
+COMMENT$$# This is a simple comment
+COMMENT$$# Audio service definition: A home service is a built-in kind of
+COMMENT$$# service allowing to play sound audio_service PlayAlarmSound plays /home/user/Music/alarm.ogg;
+COMMENT$$# A trigger service definition is used to enable or disable lights and switches,
+COMMENT$$# those come preconfigured and you don't need to specify them here.
+KEYWORD$$switch
+KEYWORD$$service
+IDENTIFIER$$OpenKitchenLight
+KEYWORD$$opens
+IDENTIFIER$$SWITCH0
+KEYWORD$$switch
+KEYWORD$$service
+IDENTIFIER$$CloseBathroomLight
+KEYWORD$$closes
+IDENTIFIER$$SWITCH2
+KEYWORD$$switch
+KEYWORD$$service
+IDENTIFIER$$ToggleGarageDoor
+IDENTIFIER$$toggles
+IDENTIFIER$$SWITCH5
+COMMENT$$# JSON Service definition: This kind of service allows calling
+COMMENT$$# external HTTP endpoints that consume JSON
+IDENTIFIER$$json_service
+IDENTIFIER$$AddToShoppingList
+DELIMITER$$(
+IDENTIFIER$$productId
+DELIMITER$$:
+KEYWORD$$int
+DELIMITER$$)
+DELIMITER$${
+KEYWORD$$endpoint
+DELIMITER$$:
+URL$$https://www.amazon.com/api/addToShoppingCart/
+KEYWORD$$request
+DELIMITER$$:
+DELIMITER$${
+IDENTIFIER$$product_id
+DELIMITER$$:
+IDENTIFIER$$productId
+DELIMITER$$,
+IDENTIFIER$$amount
+DELIMITER$$:
+INTEGER$$1
+DELIMITER$$,
+DELIMITER$$}
+DELIMITER$$}
+IDENTIFIER$$script_service
+IDENTIFIER$$HandleShoppingCart
+DELIMITER$$(
+DELIMITER$$)
+DELIMITER$${
+KEYWORD$$say
+DELIMITER$$(
+STRING$$"What product do you want to add to the shopping cart?"
+DELIMITER$$)
+DELIMITER$$;
+KEYWORD$$let
+IDENTIFIER$$product_id
+OPERATOR$$=
+IDENTIFIER$$feedback
+DELIMITER$$(
+KEYWORD$$int
+DELIMITER$$)
+DELIMITER$$;
+DELIMITER$$}
+IDENTIFIER$$script_service
+IDENTIFIER$$NearGarageDoor
+DELIMITER$$(
+DELIMITER$$)
+DELIMITER$${
+KEYWORD$$let
+IDENTIFIER$$wait_time
+OPERATOR$$=
+INTEGER$$10
+OPERATOR$$*
+INTEGER$$60
+DELIMITER$$;
+COMMENT$$# 10 minutes
+IDENTIFIER$$ToggleGarageDoor
+DELIMITER$$(
+DELIMITER$$)
+DELIMITER$$;
+KEYWORD$$sleep
+DELIMITER$$(
+IDENTIFIER$$wait_time
+DELIMITER$$)
+DELIMITER$$;
+COMMENT$$# Sleeps for a given number of seconds
+IDENTIFIER$$ToggleGarageDoor
+DELIMITER$$(
+DELIMITER$$)
+DELIMITER$$;
+DELIMITER$$}
