@@ -95,7 +95,7 @@ IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 INTEGER=-?[0-9]+
 STRING=\"[^\\\"]*\"
 PATH=//?([a-zA-Z0-9._]*/)+[a-zA-Z0-9._]+
-PATH=(//?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+|/[a-zA-Z0-9._]+)
+PATH=(/?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+|/[a-zA-Z0-9._]+)
 OPERATOR=(\+\+?|-|\*|\/|=)
 URL=https?://([a-zA-Z0-9]+\.)+(com|org|net|cat|es|de|fr|it)(/[a-zA-Z0-9]+)*/?
 
