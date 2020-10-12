@@ -96,7 +96,7 @@ IDENTIFIER=[a-zA-Z_][a-zA-Z0-9_]*
 INTEGER=-?[0-9]+
 STRING=\"[^\\\"]*\"
 PATH=//?([a-zA-Z0-9._]+/)+[a-zA-Z0-9._]+
-URL=https?://([a-zA-Z0-9]+\.)+(com|org|net|cat|es|de|fr|it)(/[a-zA-Z0-9]+)*
+URL=https?://([a-zA-Z0-9]+\.)+(com|org|net|cat|es|de|fr|it)(/[a-zA-Z0-9]+)*/?
 
 NEWLINE=[\n\r]
 SPACE=[\t ]
@@ -108,12 +108,6 @@ SPACE=[\t ]
     LexerEvaluator.emitToken(TokenType.KEYWORD, yytext());
     numReserved++;
     System.out.println("RESERVED : " + yytext());
-}
-
-{OPERATOR}
-{
-    LexerEvaluator.emitToken(TokenType.OPERATOR, yytext());
-    System.out.println("OPERATOR : " + yytext());
 }
 
 {DELIMITER}
@@ -152,6 +146,13 @@ SPACE=[\t ]
     LexerEvaluator.emitToken(TokenType.PATH, yytext());
     System.out.println("FILEPATH: " + yytext());
  }
+
+ {OPERATOR}
+ {
+     LexerEvaluator.emitToken(TokenType.OPERATOR, yytext());
+     System.out.println("OPERATOR : " + yytext());
+ }
+
 {URL}
  {
     LexerEvaluator.emitToken(TokenType.URL, yytext());
